@@ -5,6 +5,7 @@
 # sudo -E apt-get -y install rename
 
 # 更新feeds文件
+sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
 # sed -i 's@#src-git helloworld@src-git helloworld@g' feeds.conf.default # 启用helloworld
 # sed -i 's@src-git luci@# src-git luci@g' feeds.conf.default # 禁用18.06Luci
 # sed -i 's@## src-git luci@src-git luci@g' feeds.conf.default # 启用23.05Luci
@@ -36,15 +37,15 @@ else
 fi
 
 #
-sed -i 's#192.168.1.1#172.18.18.222#g' $NET                                                    # 定制默认IP
+sed -i 's#172.18.18.2#10.0.0.1#g' $NET                                                    # 定制默认IP
 # sed -i 's#OpenWrt#OpenWrt-X86#g' $NET                                                     # 修改默认名称为OpenWrt-X86
 sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' $ZZZ                                             # 取消系统默认密码
-sed -i "s/OpenWrt /ONE build $(TZ=UTC-8 date "+%Y.%m.%d") @ GanQuanRu_MINI /g" $ZZZ              # 增加自己个性名称
-# sed -i "/uci commit luci/i\uci set luci.main.mediaurlbase=/luci-static/neobird" $ZZZ        # 设置默认主题(如果编译可会自动修改默认主题的，有可能会失效)
+sed -i "s/GanQuanRu /Jude build $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt /g" $ZZZ              # 增加自己个性名称
+sed -i "/uci commit luci/i\uci set luci.main.mediaurlbase=/luci-static/neobird" $ZZZ        # 设置默认主题(如果编译可会自动修改默认主题的，有可能会失效)
 sed -i 's#localtime  = os.date()#localtime  = os.date("%Y年%m月%d日") .. " " .. translate(os.date("%A")) .. " " .. os.date("%X")#g' package/lean/autocore/files/*/index.htm               # 修改默认时间格式
 
 # ●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●●● #
-sed -i 's#%D %V, %C#%D %V, %C GanQuanRu_MINI#g' package/base-files/files/etc/banner               # 自定义banner显示
+sed -i 's#%D %V, %C#%D %V, %C GanQuanRu_x86_64#g' package/base-files/files/etc/banner               # 自定义banner显示
 sed -i 's@list listen_https@# list listen_https@g' package/network/services/uhttpd/files/uhttpd.config               # 停止监听443端口
 # sed -i 's#option commit_interval 24h#option commit_interval 10m#g' feeds/packages/net/nlbwmon/files/nlbwmon.config               # 修改流量统计写入为10分钟
 # sed -i 's#option database_generations 10#option database_generations 3#g' feeds/packages/net/nlbwmon/files/nlbwmon.config               # 修改流量统计数据周期
@@ -56,7 +57,7 @@ sed -i '/exit 0/i\ethtool -s eth0 speed 10000 duplex full' package/base-files/fi
 
 cat >> $ZZZ <<-EOF
 # 设置旁路由模式
-uci set network.lan.gateway='172.18.18.222'                     # 旁路由设置 IPv4 网关
+uci set network.lan.gateway='172.18.18.1'                     # 旁路由设置 IPv4 网关
 uci set network.lan.dns='114.114.114.114 119.29.29.29'            # 旁路由设置 DNS(多个DNS要用空格分开)
 uci set dhcp.lan.ignore='1'                                  # 旁路由关闭DHCP功能
 uci delete network.lan.type                                  # 旁路由桥接模式-禁用
@@ -222,13 +223,13 @@ EOF
 cat >> .config <<EOF
 # CONFIG_PACKAGE_luci-app-oaf=y #应用过滤
 CONFIG_PACKAGE_luci-app-openclash=y #OpenClash客户端
-# CONFIG_PACKAGE_luci-app-serverchan=y #微信推送
+CONFIG_PACKAGE_luci-app-wechatpush=y #微信推送
 # CONFIG_PACKAGE_luci-app-eqos=y #IP限速
 # CONFIG_PACKAGE_luci-app-control-weburl=y #网址过滤
 # CONFIG_PACKAGE_luci-app-smartdns=n #smartdns服务器
 # CONFIG_PACKAGE_luci-app-adguardhome=n #ADguardhome
 CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
-# CONFIG_PACKAGE_luci-app-neobird-config=y #argon主题设置
+CONFIG_PACKAGE_luci-app-argon-config=y #argon主题设置
 # CONFIG_PACKAGE_luci-app-autotimeset=y #定时重启系统，网络
 # CONFIG_PACKAGE_luci-app-ddnsto=n #小宝开发的DDNS.to内网穿透
 # CONFIG_PACKAGE_ddnsto=n #DDNS.to内网穿透软件包
@@ -268,8 +269,8 @@ CONFIG_PACKAGE_luci-app-autoreboot=n #定时重启
 CONFIG_PACKAGE_luci-app-upnp=n #通用即插即用UPnP(端口自动转发)
 CONFIG_PACKAGE_luci-app-arpbind=n #IP/MAC绑定
 CONFIG_PACKAGE_luci-app-accesscontrol=n #上网时间控制
-CONFIG_PACKAGE_luci-app-wol=n #网络唤醒
-CONFIG_PACKAGE_luci-app-nps=y #nps内网穿透
+CONFIG_PACKAGE_luci-app-ddns-go=y #ddns-go
+CONFIG_PACKAGE_luci-app-npc=y #nps内网穿透
 CONFIG_PACKAGE_luci-app-frpc=y #Frp内网穿透
 CONFIG_PACKAGE_luci-app-nlbwmon=y #宽带流量监控
 CONFIG_PACKAGE_luci-app-wrtbwmon=y #实时流量监测
@@ -312,6 +313,7 @@ EOF
 # LuCI主题:
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-theme-neobird=y
+CONFIG_PACKAGE_luci-theme-argon=y
 CONFIG_PACKAGE_luci-theme-edge=n
 EOF
 
