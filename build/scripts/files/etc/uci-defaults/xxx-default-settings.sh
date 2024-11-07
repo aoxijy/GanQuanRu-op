@@ -10,16 +10,16 @@ cp -rf /rom/etc/openclash/core/* /etc/openclash/core
 
 # 设置NTP时间服务器
 #uci add_list system.ntp.server='ntp.tencent.com'
-#uci add_list system.ntp.server='ntp1.aliyun.com'
+uci add_list system.ntp.server='ntp1.aliyun.com'
 #uci add_list system.ntp.server='ntp.ntsc.ac.cn'
 #uci add_list system.ntp.server='cn.ntp.org.cn'
 # uci commit system
 
 # 设置默认主题
-uci set luci.main.mediaurlbase='/luci-static/neobird' && uci commit luci
+uci set luci.main.mediaurlbase='/luci-static/argon' && uci commit luci
 
 # 修改主机名称为GanQuanRu-x86
-# uci set system.@system[0].hostname='GanQuanRu-x86'
+uci set system.@system[0].hostname='GanQuanRu-x86'
 
 # 此文件名注意ls 排序，下面也行
 # sed -ri "/option mediaurlbase/s#(/luci-static/)[^']+#\neobird#" /etc/config/luci
