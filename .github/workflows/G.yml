@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [gqru_mini,gqru_docker]  #[gqru_mini,gqru_docker]
+        target: [Mini_x64,Docker_x64]  #[Mini_x64,Docker_x64]
 
     steps:
     - name: 检查文件
