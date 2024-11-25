@@ -258,6 +258,7 @@ CONFIG_PACKAGE_luci-app-wechatpush=y #微信推送
 # CONFIG_PACKAGE_luci-app-smartdns=n #smartdns服务器
 # CONFIG_PACKAGE_luci-app-adguardhome=n #ADguardhome
 CONFIG_PACKAGE_luci-app-design-config=y
+CONFIG_PACKAGE_luci-app-design=y
 CONFIG_PACKAGE_luci-app-ddns-go=y
 CONFIG_PACKAGE_luci-app-alist=n
 CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
