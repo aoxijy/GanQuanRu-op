@@ -17,7 +17,6 @@ git clone https://github.com/aoxiyu/aoxi-package.git package/aoxi-package
 ./scripts/feeds update -a && ./scripts/feeds install -a -f
 
 # 删除部分默认包
-rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,natflow,urllogger,fullconenat,libnftnl,dogcom,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
 rm -rf feeds/luci/applications/luci-app-qbittorrent
 rm -rf feeds/luci/applications/luci-app-dogcom
 rm -rf feeds/luci/themes/luci-theme-argon
