@@ -250,7 +250,6 @@ EOF
 
 # 第三方插件选择:
 cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-wechatpush=y
 CONFIG_PACKAGE_luci-app-openclash=y #OpenClash客户端
 CONFIG_PACKAGE_luci-app-wechatpush=y #微信推送
 # CONFIG_PACKAGE_luci-app-eqos=n #IP限速
@@ -258,14 +257,14 @@ CONFIG_PACKAGE_luci-app-wechatpush=y #微信推送
 # CONFIG_PACKAGE_luci-app-smartdns=n #smartdns服务器
 # CONFIG_PACKAGE_luci-app-adguardhome=n #ADguardhome
 CONFIG_PACKAGE_luci-app-design-config=n
-CONFIG_PACKAGE_luci-app-design=y
+CONFIG_PACKAGE_luci-app-design=n
 CONFIG_PACKAGE_luci-app-ddns-go=y
 CONFIG_PACKAGE_luci-app-alist=n
 CONFIG_PACKAGE_luci-app-poweroff=y #关机（增加关机功能）
 # CONFIG_PACKAGE_luci-app-argon-config=y #argon主题设置
 CONFIG_PACKAGE_luci-theme-atmaterial_new=y #atmaterial 三合一主题
-CONFIG_PACKAGE_luci-theme-neobird=y #neobird 主题
-CONFIG_PACKAGE_luci-theme-design=y #design 主题
+CONFIG_PACKAGE_luci-theme-neobird=n #neobird 主题
+CONFIG_PACKAGE_luci-theme-design=n #design 主题
 CONFIG_PACKAGE_luci-app-autotimeset=n #定时重启系统，网络
 # CONFIG_PACKAGE_luci-app-ddnsto=n #小宝开发的DDNS.to内网穿透
 # CONFIG_PACKAGE_ddnsto=n #DDNS.to内网穿透软件包
