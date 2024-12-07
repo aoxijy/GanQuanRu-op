@@ -10,8 +10,8 @@ cat feeds.conf.default
 
 # 添加第三方软件包
 
-git clone https://github.com/asvow/luci-app-tailscale package/luci-app-tailscale
-git clone https://github.com/kenzok8/small-package package/small-package
+git clone https://github.com/asvow/luci-app-tailscale.git package/luci-app-tailscale
+git clone https://github.com/kenzok8/small-package.git package/small-package
 
 # 更新并安装源
 ./scripts/feeds clean
